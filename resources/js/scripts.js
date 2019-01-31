@@ -1,23 +1,19 @@
-  /* eslint-env jquery */
-  /* global document */
+  $(document).ready(function() {
+		   	var stickyNavTop = $('nav').offset().top;
+		   	var stickyNav = function(){
+			    var scrollTop = $(window).scrollTop(); // our current vertical position from the top     
+			    // if we've scrolled more than the navigation, change its position to fixed to stick to top,
+			    // otherwise change it back to relative
+			    if (scrollTop > stickyNavTop) { 
+			        $('nav').addClass('sticky');
+			    } else {
+			        $('nav').removeClass('sticky'); 
+			    }
+			};
 
-    $(document).ready(function() {
-        
-    $('.js--section-features').waypoint(function(direction) {
-       if (direction == "down") {
-           $('nav').addClass('sticky');
-       }
-        else{
-          $('nav').removeClass('sticky');
-       }
-    });
-  
-   /*
-   var waypoints = $('#handler-first').waypoint(function(direction) {
-  notify(this.element.id + ' hit 25% from top of window') 
-}, {
-  offset: '25%'
-})
-*/
-    
-});
+			stickyNav();
+			// and run it again every time you scroll
+			$(window).scroll(function() {
+				stickyNav();
+			});
+		});
